@@ -1,7 +1,7 @@
 import csv
 import os
 
-def compare_csv_files(a_file, b_file, AI):
+def compare_csv_files(a_file, b_file, AI, times):
     # 結果を保存するリスト
     discrepancies = []
     
@@ -22,7 +22,7 @@ def compare_csv_files(a_file, b_file, AI):
     discrepancy_count = len(discrepancies)
 
     # 結果を新しいCSVファイルに書き込む
-    output_file = f'./result/{AI}-{discrepancy_count}.csv'
+    output_file = f'./result/{AI}/{AI}_{times}_{discrepancy_count}.csv'
     with open(output_file, mode='w', newline='', encoding='utf-8') as file_out:
         writer = csv.writer(file_out)
         for item in discrepancies:
@@ -35,9 +35,10 @@ if __name__ == "__main__":
     directory = os.path.dirname(__file__)
 
     #ここを変更する
-    AI = 'claude' 
+    AI = 'example' 
+    times = 0
 
     data_file_path = os.path.join(directory, 'strawberry_problem_test_data.csv')
-    AI_file_path = os.path.join(directory, f"./answer/{AI}.csv")
+    AI_file_path = os.path.join(directory, f"./answer/{AI}/{AI}_{times}.csv")
     
-    compare_csv_files(data_file_path, AI_file_path, AI)
+    compare_csv_files(data_file_path, AI_file_path, AI, times)
